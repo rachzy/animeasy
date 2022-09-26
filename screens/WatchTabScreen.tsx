@@ -1,252 +1,93 @@
 import { Fragment, useState } from "react";
 
 import { StyleSheet, View, FlatList, Text, Pressable } from "react-native";
-import MovieItem from "../components/MovieItem";
-import SeriesItem from "../components/SeriesItem";
+import ShowItem from "../components/ShowItem";
 
-import { IMovie, ISeries, RootTabScreenProps } from "../types";
-
-interface IShows {
-  movies: IMovie[];
-  series: ISeries[];
-}
+import { RootTabScreenProps, Show } from "../types";
 
 export default function WatchTabScreen(
   this: any,
   { navigation }: RootTabScreenProps<"WatchTab">
 ) {
-  const [shows, setShows] = useState<IShows>({
-    movies: [
-      {
-        id: 1,
-        title: "Your Name",
-        description:
-          "Your Name is a 2016 Japanese animated romantic fantasy film produced by CoMix Wave Films and distributed by Toho. It depicts a high school boy in Tokyo and a high school girl in the Japanese countryside who suddenly and inexplicably begin to swap bodies",
-        thumbnail: require("../assets/shows/yourname-banner.jpg"),
-        duration: 120,
-        hasStarted: false,
-        link: "youtube.com",
-      },
-    ],
-    series: [
-      {
-        id: 2,
-        title: "Hunter x Hunter",
-        description:
-          "The story focuses on a young boy named Gon Freecss who discovers that his father, who left him at a young age, is actually a world-renowned Hunter, a licensed professional who specializes in fantastical pursuits such as locating rare or unidentified animal species, treasure hunting, surveying unexplored enclaves, or ...",
-        amountOfEpisodes: 115,
-        episodes: [
-          {
-            number: 1,
-            title: "Firsttt",
-            description: "Tired of googling",
-            duration: 20,
-            link: "youtube.com",
-          },
-        ],
-        hasStarted: false,
-        thumbnail: require("../assets/shows/hxh-banner.jpg"),
-      },
-      {
-        id: 2,
-        title: "Hunter x Hunter",
-        description:
-          "The story focuses on a young boy named Gon Freecss who discovers that his father, who left him at a young age, is actually a world-renowned Hunter, a licensed professional who specializes in fantastical pursuits such as locating rare or unidentified animal species, treasure hunting, surveying unexplored enclaves, or ...",
-        amountOfEpisodes: 115,
-        episodes: [
-          {
-            number: 1,
-            title: "Firsttt",
-            description: "Tired of googling",
-            duration: 20,
-            link: "youtube.com",
-          },
-        ],
-        hasStarted: false,
-        thumbnail: require("../assets/shows/hxh-banner.jpg"),
-      },
-      {
-        id: 2,
-        title: "Hunter x Hunter",
-        description:
-          "The story focuses on a young boy named Gon Freecss who discovers that his father, who left him at a young age, is actually a world-renowned Hunter, a licensed professional who specializes in fantastical pursuits such as locating rare or unidentified animal species, treasure hunting, surveying unexplored enclaves, or ...",
-        amountOfEpisodes: 115,
-        episodes: [
-          {
-            number: 1,
-            title: "Firsttt",
-            description: "Tired of googling",
-            duration: 20,
-            link: "youtube.com",
-          },
-        ],
-        hasStarted: false,
-        thumbnail: require("../assets/shows/hxh-banner.jpg"),
-      },
-      {
-        id: 2,
-        title: "Hunter x Hunter",
-        description:
-          "The story focuses on a young boy named Gon Freecss who discovers that his father, who left him at a young age, is actually a world-renowned Hunter, a licensed professional who specializes in fantastical pursuits such as locating rare or unidentified animal species, treasure hunting, surveying unexplored enclaves, or ...",
-        amountOfEpisodes: 115,
-        episodes: [
-          {
-            number: 1,
-            title: "Firsttt",
-            description: "Tired of googling",
-            duration: 20,
-            link: "youtube.com",
-          },
-        ],
-        hasStarted: false,
-        thumbnail: require("../assets/shows/hxh-banner.jpg"),
-      },
-      {
-        id: 2,
-        title: "Hunter x Hunter",
-        description:
-          "The story focuses on a young boy named Gon Freecss who discovers that his father, who left him at a young age, is actually a world-renowned Hunter, a licensed professional who specializes in fantastical pursuits such as locating rare or unidentified animal species, treasure hunting, surveying unexplored enclaves, or ...",
-        amountOfEpisodes: 115,
-        episodes: [
-          {
-            number: 1,
-            title: "Firsttt",
-            description: "Tired of googling",
-            duration: 20,
-            link: "youtube.com",
-          },
-        ],
-        hasStarted: false,
-        thumbnail: require("../assets/shows/hxh-banner.jpg"),
-      },
-      {
-        id: 2,
-        title: "Hunter x Hunter",
-        description:
-          "The story focuses on a young boy named Gon Freecss who discovers that his father, who left him at a young age, is actually a world-renowned Hunter, a licensed professional who specializes in fantastical pursuits such as locating rare or unidentified animal species, treasure hunting, surveying unexplored enclaves, or ...",
-        amountOfEpisodes: 115,
-        episodes: [
-          {
-            number: 1,
-            title: "Firsttt",
-            description: "Tired of googling",
-            duration: 20,
-            link: "youtube.com",
-          },
-        ],
-        hasStarted: false,
-        thumbnail: require("../assets/shows/hxh-banner.jpg"),
-      },
-      {
-        id: 2,
-        title: "Hunter x Hunter",
-        description:
-          "The story focuses on a young boy named Gon Freecss who discovers that his father, who left him at a young age, is actually a world-renowned Hunter, a licensed professional who specializes in fantastical pursuits such as locating rare or unidentified animal species, treasure hunting, surveying unexplored enclaves, or ...",
-        amountOfEpisodes: 115,
-        episodes: [
-          {
-            number: 1,
-            title: "Firsttt",
-            description: "Tired of googling",
-            duration: 20,
-            link: "youtube.com",
-          },
-        ],
-        hasStarted: false,
-        thumbnail: require("../assets/shows/hxh-banner.jpg"),
-      },
-      {
-        id: 2,
-        title: "Hunter x Hunter",
-        description:
-          "The story focuses on a young boy named Gon Freecss who discovers that his father, who left him at a young age, is actually a world-renowned Hunter, a licensed professional who specializes in fantastical pursuits such as locating rare or unidentified animal species, treasure hunting, surveying unexplored enclaves, or ...",
-        amountOfEpisodes: 115,
-        episodes: [
-          {
-            number: 1,
-            title: "Firsttt",
-            description: "Tired of googling",
-            duration: 20,
-            link: "youtube.com",
-          },
-        ],
-        hasStarted: false,
-        thumbnail: require("../assets/shows/hxh-banner.jpg"),
-      },
-      {
-        id: 2,
-        title: "Hunter x Hunter",
-        description:
-          "The story focuses on a young boy named Gon Freecss who discovers that his father, who left him at a young age, is actually a world-renowned Hunter, a licensed professional who specializes in fantastical pursuits such as locating rare or unidentified animal species, treasure hunting, surveying unexplored enclaves, or ...",
-        amountOfEpisodes: 115,
-        episodes: [
-          {
-            number: 1,
-            title: "Firsttt",
-            description: "Tired of googling",
-            duration: 20,
-            link: "youtube.com",
-          },
-        ],
-        hasStarted: false,
-        thumbnail: require("../assets/shows/hxh-banner.jpg"),
-      },
-      {
-        id: 2,
-        title: "Hunter x Hunter",
-        description:
-          "The story focuses on a young boy named Gon Freecss who discovers that his father, who left him at a young age, is actually a world-renowned Hunter, a licensed professional who specializes in fantastical pursuits such as locating rare or unidentified animal species, treasure hunting, surveying unexplored enclaves, or ...",
-        amountOfEpisodes: 115,
-        episodes: [
-          {
-            number: 1,
-            title: "Firsttt",
-            description: "Tired of googling",
-            duration: 20,
-            link: "youtube.com",
-          },
-        ],
-        hasStarted: false,
-        thumbnail: require("../assets/shows/hxh-banner.jpg"),
-      },
-    ],
-  });
-  const [selectedOption, setSelectedOption] = useState<"series" | "movies">(
+  const [shows, setShows] = useState<Show[]>([
+    {
+      id: 1,
+      type: "movie",
+      title: "Your Name",
+      description:
+        "Your Name is a 2016 Japanese animated romantic fantasy film produced by CoMix Wave Films and distributed by Toho. It depicts a high school boy in Tokyo and a high school girl in the Japanese countryside who suddenly and inexplicably begin to swap bodies",
+      thumbnail: require("../assets/shows/yourname-banner.jpg"),
+      duration: 120,
+      hasStarted: false,
+      link: "youtube.com",
+    },
+
+    {
+      id: 2,
+      type: "series",
+      title: "Hunter x Hunter",
+      description:
+        "The story focuses on a young boy named Gon Freecss who discovers that his father, who left him at a young age, is actually a world-renowned Hunter, a licensed professional who specializes in fantastical pursuits such as locating rare or unidentified animal species, treasure hunting, surveying unexplored enclaves, or ...",
+      amountOfEpisodes: 115,
+      episodes: [
+        {
+          id: 12,
+          number: 1,
+          title: "Firsttt",
+          thumbnail: require("../assets/shows/hxh-banner.jpg"),
+          description: "Tired of googling",
+          duration: 20,
+          link: "youtube.com",
+          hasStarted: false,
+        },
+        {
+          id: 11,
+          number: 2,
+          title: "Secondddd",
+          thumbnail: require("../assets/shows/hxh-banner.jpg"),
+          description: "Tired of googling",
+          duration: 20,
+          link: "youtube.com",
+          hasStarted: false,
+        },
+      ],
+      hasStarted: false,
+      thumbnail: require("../assets/shows/hxh-banner.jpg"),
+    },
+  ]);
+  const [selectedOption, setSelectedOption] = useState<"series" | "movie">(
     "series"
   );
 
-  const handleOptionPress = (optionTitle: "series" | "movies") => {
+  const handleOptionPress = (optionTitle: "series" | "movie") => {
     if (selectedOption === optionTitle) return;
     setSelectedOption(optionTitle);
   };
 
+  const handleShowImagePress = (show: Show) => {
+    navigation.navigate("ShowAboutModal", { show: show });
+  };
+
   const renderShows = () => {
-    if (!shows.movies || !shows.series) return;
     return (
       <Fragment>
-        {selectedOption === "series" ? (
-          <FlatList
-            data={shows.series}
-            renderItem={(itemData) => {
-              const { item } = itemData;
-              return <SeriesItem series={item} />;
-            }}
-            keyExtractor={(item, index) => {
-              return item.id.toString() + index.toString();
-            }}
-          />
-        ) : (
-          <FlatList
-            data={shows.movies}
-            renderItem={(itemData) => {
-              const { item } = itemData;
-              return <MovieItem movie={item} />;
-            }}
-            keyExtractor={(item, index) => {
-              return item.id.toString() + index.toString();
-            }}
-          />
-        )}
+        <FlatList
+          data={shows}
+          renderItem={(itemData) => {
+            const { item } = itemData;
+            if(item.type !== selectedOption) return null;
+            return (
+              <ShowItem
+                show={item}
+                showType={item.type}
+                handleImagePress={handleShowImagePress}
+              />
+            );
+          }}
+          keyExtractor={(item, index) => {
+            return item.id.toString() + index.toString();
+          }}
+        />
       </Fragment>
     );
   };
@@ -271,16 +112,16 @@ export default function WatchTabScreen(
           </Text>
         </Pressable>
         <Pressable
-          onPress={handleOptionPress.bind(this, "movies")}
+          onPress={handleOptionPress.bind(this, "movie")}
           style={[
             styles.showTypeOption,
-            selectedOption === "movies" && styles.optionSelected,
+            selectedOption === "movie" && styles.optionSelected,
           ]}
         >
           <Text
             style={[
               styles.showTypeOptionLabel,
-              selectedOption === "movies" && styles.labelSelected,
+              selectedOption === "movie" && styles.labelSelected,
             ]}
           >
             Movies

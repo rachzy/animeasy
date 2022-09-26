@@ -17,6 +17,7 @@ declare global {
 export type RootStackParamList = {
   Root: NavigatorScreenParams<RootTabParamList> | undefined;
   Modal: undefined;
+  ShowAboutModal: undefined;
   NotFound: undefined;
 };
 
@@ -37,10 +38,15 @@ export type RootTabScreenProps<Screen extends keyof RootTabParamList> = Composit
 
 export type Show = {
   id: number;
+  type: "movie" | "series",
   title: string;
   description: string;
   thumbnail: ImageSourcePropType;
   hasStarted: boolean;
+  episodes?: Episode[];
+  amountOfEpisodes?: number;
+  duration?: number;
+  link?: string;
 }
 
 export interface IMovie extends Show {
@@ -48,12 +54,15 @@ export interface IMovie extends Show {
   link: string;
 }
 
-type Episode = {
+export type Episode = {
+  id: number;
   number: number;
   title: string;
   description: string;
+  thumbnail: ImageSourcePropType;
   duration: number;
   link: string;
+  hasStarted: boolean;
 }
 
 export interface ISeries extends Show {
