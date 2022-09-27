@@ -65,7 +65,7 @@ export default function WatchTabScreen(
   };
 
   const handleShowImagePress = (show: Show) => {
-    navigation.navigate("ShowAboutModal", { show: show });
+    navigation.navigate("ShowAboutModal", {show: show });
   };
 
   const renderShows = () => {
