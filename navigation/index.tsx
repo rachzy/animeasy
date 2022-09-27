@@ -64,12 +64,19 @@ function BottomTabNavigator() {
       screenOptions={{
         tabBarActiveTintColor: "#03DAC5",
         tabBarShowLabel: true,
+        tabBarStyle: {
+          backgroundColor: "rgb(40, 40, 40)"
+        },
+        headerStyle: {
+          backgroundColor: "rgb(40, 40, 40)",
+        }
       }}>
       <BottomTab.Screen
         name="WatchTab"
         component={WatchTabScreen}
         options={({ navigation }: RootTabScreenProps<"WatchTab">) => ({
           title: 'Watch',
+          headerTintColor: "white",
           tabBarIcon: ({ color }) => <TabBarIcon name="tv" color={color} />,
           headerRight: () => (
             <Pressable
@@ -80,7 +87,7 @@ function BottomTabNavigator() {
               <FontAwesome
                 name="info-circle"
                 size={25}
-                color={Colors[colorScheme].text}
+                color={"white"}
                 style={{ marginRight: 15 }}
               />
             </Pressable>
