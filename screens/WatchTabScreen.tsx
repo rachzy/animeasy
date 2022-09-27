@@ -75,13 +75,13 @@ export default function WatchTabScreen(
           data={shows}
           renderItem={(itemData) => {
             const { item } = itemData;
-            if(item.type !== selectedOption) return null;
+            if (item.type !== selectedOption) return null;
             return (
-              <ShowItem
-                show={item}
-                showType={item.type}
-                handleImagePress={handleShowImagePress}
-              />
+                <ShowItem
+                  show={item}
+                  showType={item.type}
+                  handleImagePress={handleShowImagePress}
+                />
             );
           }}
           keyExtractor={(item, index) => {
@@ -139,7 +139,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     padding: 10,
-    backgroundColor: "rgb(10, 10, 10)"
+    backgroundColor: "rgb(10, 10, 10)",
   },
   showTypeSelector: {
     flexDirection: "row",

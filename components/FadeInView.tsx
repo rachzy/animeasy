@@ -3,9 +3,10 @@ import { Animated } from "react-native";
 
 interface IProps {
   children: React.ReactNode;
+  style?: {}
 }
 
-const FadeInView: React.FC<IProps> = ({ children }) => {
+const FadeInView: React.FC<IProps> = ({ children, style }) => {
   const fadeAnim = useRef(new Animated.Value(0)).current;
 
   useEffect(() => {
@@ -16,7 +17,7 @@ const FadeInView: React.FC<IProps> = ({ children }) => {
     }).start();
   }, [fadeAnim]);
 
-  return <Animated.View style={{opacity: fadeAnim}}>{children}</Animated.View>;
+  return <Animated.View style={[style, {opacity: fadeAnim}]}>{children}</Animated.View>;
 };
 
 export default FadeInView;

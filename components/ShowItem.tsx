@@ -1,6 +1,7 @@
 import { View, Image, Text, StyleSheet, Pressable } from "react-native";
 
 import { Show } from "../types";
+import FadeInView from "./FadeInView";
 import PlayButton from "./PlayButton";
 
 interface IProps {
@@ -11,7 +12,7 @@ interface IProps {
 
 const ShowItem: React.FC<IProps> = ({ show, showType, handleImagePress }) => {
   return (
-    <View style={styles.container}>
+    <FadeInView style={styles.container}>
       <Pressable onPress={handleImagePress.bind(this, show)}>
         <Image
           style={styles.thumbnail}
@@ -30,7 +31,7 @@ const ShowItem: React.FC<IProps> = ({ show, showType, handleImagePress }) => {
         </View>
         <PlayButton style={{ top: -25, left: -30 }} />
       </View>
-    </View>
+    </FadeInView>
   );
 };
 
@@ -64,7 +65,7 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.25,
     shadowRadius: 20.0,
     elevation: 24,
-
+    opacity: 0.9
   },
   labelText: {
     padding: 5,
