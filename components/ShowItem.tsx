@@ -23,9 +23,9 @@ const ShowItem: React.FC<IProps> = ({ show, showType, handleImagePress }) => {
         <View style={styles.labelText}>
           <Text style={styles.labelTitle}>{show.title}</Text>
           {showType === "series" ? (
-            <Text>{show.amountOfEpisodes} episodes</Text>
+            <Text style={{color: "white"}}>{show.amountOfEpisodes} episodes</Text>
           ) : (
-            <Text>{show.duration} min</Text>
+            <Text style={{color: "white"}}>{show.duration} min</Text>
           )}
         </View>
         <PlayButton style={{ top: -25, left: -30 }} />
@@ -53,7 +53,7 @@ const styles = StyleSheet.create({
     width: "100%",
     flexDirection: "row",
     justifyContent: "space-between",
-    backgroundColor: "white",
+    backgroundColor: "rgb(50, 50, 50)",
     height: 60,
     marginTop: -60,
     shadowColor: "#000000",
@@ -64,9 +64,7 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.25,
     shadowRadius: 20.0,
     elevation: 24,
-    borderColor: "#03DAC5",
-    borderWidth: 1,
-    borderTopWidth: 2,
+
   },
   labelText: {
     padding: 5,
