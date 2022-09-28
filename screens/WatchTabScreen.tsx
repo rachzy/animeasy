@@ -19,7 +19,7 @@ export default function WatchTabScreen(
       thumbnail: require("../assets/shows/yourname-banner.jpg"),
       duration: 120,
       hasStarted: false,
-      link: "youtube.com",
+      link: "https://www.trueliketop.org/play/player/serverjw.php?f=kimi-no-na-wa/leg.mp4",
     },
 
     {
@@ -37,7 +37,7 @@ export default function WatchTabScreen(
           thumbnail: require("../assets/shows/hxh-banner.jpg"),
           description: "Tired of googling",
           duration: 20,
-          link: "youtube.com",
+          link: "https://www.xpanimes.com/videozin/video-play.mp4/yt.php?contentId=bFU3R01HVGVPOUEwZHN6c2xkdEhPZWxXdEs3bEZOSzJueFlCZFozYzlpRT0=",
           hasStarted: false,
         },
         {
@@ -64,8 +64,15 @@ export default function WatchTabScreen(
     setSelectedOption(optionTitle);
   };
 
+  const handlePlayPress = (show: Show) => {
+    navigation.navigate("VideoModal", {
+      title: show.type === "movie" ? show.title : (show.episodes && show.episodes[0].title) || "",
+      link: (show.type === "movie" ? show.link : (show.episodes && show.episodes[0].link)) || "",
+    });
+  }
+
   const handleShowImagePress = (show: Show) => {
-    navigation.navigate("ShowAboutModal", {show: show });
+    navigation.navigate("ShowAboutModal", { show: show, handlePlayPress: handlePlayPress });
   };
 
   const renderShows = () => {
@@ -77,11 +84,12 @@ export default function WatchTabScreen(
             const { item } = itemData;
             if (item.type !== selectedOption) return null;
             return (
-                <ShowItem
-                  show={item}
-                  showType={item.type}
-                  handleImagePress={handleShowImagePress}
-                />
+              <ShowItem
+                show={item}
+                showType={item.type}
+                handleImagePress={handleShowImagePress}
+                handlePlayButtonPress={handlePlayPress}
+              />
             );
           }}
           keyExtractor={(item, index) => {

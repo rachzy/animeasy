@@ -8,16 +8,16 @@ interface IProps {
   show: Show;
   showType: "movie" | "series";
   handleImagePress: (show: any) => void;
+  handlePlayButtonPress: (show: any) => void;
 }
 
-const ShowItem: React.FC<IProps> = ({ show, showType, handleImagePress }) => {
+const ShowItem: React.FC<IProps> = ({ show, showType, handleImagePress, handlePlayButtonPress }) => {
   return (
     <FadeInView style={styles.container}>
       <Pressable onPress={handleImagePress.bind(this, show)}>
         <Image
           style={styles.thumbnail}
           source={show.thumbnail}
-          blurRadius={2}
         />
       </Pressable>
       <View style={styles.label}>
@@ -26,10 +26,10 @@ const ShowItem: React.FC<IProps> = ({ show, showType, handleImagePress }) => {
           {showType === "series" ? (
             <Text style={{color: "white"}}>{show.amountOfEpisodes} episodes</Text>
           ) : (
-            <Text style={{color: "white"}}>{show.duration} min</Text>
+            <Text style={{color: "white" }}>{show.duration} min</Text>
           )}
         </View>
-        <PlayButton style={{ top: -25, left: -30 }} />
+        <PlayButton style={{ top: -25, left: -30 }} onPress={handlePlayButtonPress.bind(this, show)} />
       </View>
     </FadeInView>
   );

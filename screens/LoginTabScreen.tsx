@@ -5,7 +5,7 @@ import { RootTabScreenProps } from '../types';
 export default function LoginTabScreen({ navigation }: RootTabScreenProps<'LoginTab'>) {
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>That's Login Screen!</Text>
+      <Text style={styles.title}>Coming Soon!</Text>
     </View>
   );
 }
@@ -19,6 +19,7 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 20,
     fontWeight: 'bold',
+    color: "white"
   },
   separator: {
     marginVertical: 30,

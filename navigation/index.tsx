@@ -10,15 +10,15 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import * as React from 'react';
 import { ColorSchemeName, Pressable } from 'react-native';
 
-import Colors from '../constants/Colors';
 import useColorScheme from '../hooks/useColorScheme';
-import ModalScreen from '../screens/ModalScreen';
+import ModalScreen from '../screens/Modals/ModalScreen';
 import NotFoundScreen from '../screens/NotFoundScreen';
 import WatchTabScreen from '../screens/WatchTabScreen';
 import LoginTabScreen from '../screens/LoginTabScreen';
 import { RootStackParamList, RootTabParamList, RootTabScreenProps} from '../types';
 import LinkingConfiguration from './LinkingConfiguration';
-import ShowAboutModal from '../screens/ShowAboutModal';
+import ShowAboutModal from '../screens/Modals/ShowAboutModal';
+import VideoModal from '../screens/Modals/VideoModal';
 
 export default function Navigation({ colorScheme }: { colorScheme: ColorSchemeName }) {
   return (
@@ -42,8 +42,8 @@ function RootNavigator() {
       <Stack.Screen name="Root" component={BottomTabNavigator} options={{ headerShown: false }} />
       <Stack.Screen name="NotFound" component={NotFoundScreen} options={{ title: 'Oops!' }} />
       <Stack.Group screenOptions={{ presentation: 'modal' }}>
-        <Stack.Screen name="Modal" component={ModalScreen} />
         <Stack.Screen name="ShowAboutModal" component={ShowAboutModal} options={{gestureEnabled: true}} />
+        <Stack.Screen name="VideoModal" component={VideoModal} options={{gestureEnabled: true}} />
       </Stack.Group>
     </Stack.Navigator>
   );
@@ -80,7 +80,7 @@ function BottomTabNavigator() {
           tabBarIcon: ({ color }) => <TabBarIcon name="tv" color={color} />,
           headerRight: () => (
             <Pressable
-              onPress={() => navigation.navigate('Modal')}
+              onPress={() => {}}
               style={({ pressed }) => ({
                 opacity: pressed ? 0.5 : 1,
               })}>
