@@ -3,28 +3,40 @@
  * https://reactnavigation.org/docs/getting-started
  *
  */
-import { FontAwesome } from '@expo/vector-icons';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { NavigationContainer, DefaultTheme, DarkTheme } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import * as React from 'react';
-import { ColorSchemeName, Pressable } from 'react-native';
+import { FontAwesome } from "@expo/vector-icons";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import {
+  NavigationContainer,
+  DefaultTheme,
+  DarkTheme,
+} from "@react-navigation/native";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import * as React from "react";
+import { ColorSchemeName, Pressable } from "react-native";
 
-import useColorScheme from '../hooks/useColorScheme';
-import ModalScreen from '../screens/Modals/ModalScreen';
-import NotFoundScreen from '../screens/NotFoundScreen';
-import WatchTabScreen from '../screens/WatchTabScreen';
-import LoginTabScreen from '../screens/LoginTabScreen';
-import { RootStackParamList, RootTabParamList, RootTabScreenProps} from '../types';
-import LinkingConfiguration from './LinkingConfiguration';
-import ShowAboutModal from '../screens/Modals/ShowAboutModal';
-import VideoModal from '../screens/Modals/VideoModal';
+import useColorScheme from "../hooks/useColorScheme";
+import NotFoundScreen from "../screens/NotFoundScreen";
+import WatchTabScreen from "../screens/WatchTabScreen";
+import LoginTabScreen from "../screens/LoginTabScreen";
+import {
+  RootStackParamList,
+  RootTabParamList,
+  RootTabScreenProps,
+} from "../types";
+import LinkingConfiguration from "./LinkingConfiguration";
+import ShowAboutModal from "../screens/Modals/ShowAboutModal";
+import VideoModal from "../screens/Modals/VideoModal";
 
-export default function Navigation({ colorScheme }: { colorScheme: ColorSchemeName }) {
+export default function Navigation({
+  colorScheme,
+}: {
+  colorScheme: ColorSchemeName;
+}) {
   return (
     <NavigationContainer
       linking={LinkingConfiguration}
-      theme={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
+      theme={colorScheme === "dark" ? DarkTheme : DefaultTheme}
+    >
       <RootNavigator />
     </NavigationContainer>
   );
@@ -38,12 +50,35 @@ const Stack = createNativeStackNavigator<RootStackParamList>();
 
 function RootNavigator() {
   return (
-    <Stack.Navigator>
-      <Stack.Screen name="Root" component={BottomTabNavigator} options={{ headerShown: false }} />
-      <Stack.Screen name="NotFound" component={NotFoundScreen} options={{ title: 'Oops!' }} />
-      <Stack.Group screenOptions={{ presentation: 'modal' }}>
-        <Stack.Screen name="ShowAboutModal" component={ShowAboutModal} options={{gestureEnabled: true}} />
-        <Stack.Screen name="VideoModal" component={VideoModal} options={{gestureEnabled: true}} />
+    <Stack.Navigator
+      screenOptions={{
+        headerStyle: {
+          backgroundColor: "rgb(50, 50, 50)",
+        },
+        headerTintColor: "white",
+      }}
+    >
+      <Stack.Screen
+        name="Root"
+        component={BottomTabNavigator}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="NotFound"
+        component={NotFoundScreen}
+        options={{ title: "Oops!" }}
+      />
+      <Stack.Group screenOptions={{ presentation: "modal" }}>
+        <Stack.Screen
+          name="ShowAboutModal"
+          component={ShowAboutModal}
+          options={{ gestureEnabled: true }}
+        />
+        <Stack.Screen
+          name="VideoModal"
+          component={VideoModal}
+          options={{ gestureEnabled: true }}
+        />
       </Stack.Group>
     </Stack.Navigator>
   );
@@ -65,17 +100,18 @@ function BottomTabNavigator() {
         tabBarActiveTintColor: "#03DAC5",
         tabBarShowLabel: true,
         tabBarStyle: {
-          backgroundColor: "rgb(40, 40, 40)"
+          backgroundColor: "rgb(50, 50, 50)",
         },
         headerStyle: {
-          backgroundColor: "rgb(40, 40, 40)",
-        }
-      }}>
+          backgroundColor: "rgb(50, 50, 50)",
+        },
+      }}
+    >
       <BottomTab.Screen
         name="WatchTab"
         component={WatchTabScreen}
         options={({ navigation }: RootTabScreenProps<"WatchTab">) => ({
-          title: 'Watch',
+          title: "Watch",
           headerTintColor: "white",
           tabBarIcon: ({ color }) => <TabBarIcon name="tv" color={color} />,
           headerRight: () => (
@@ -83,7 +119,8 @@ function BottomTabNavigator() {
               onPress={() => {}}
               style={({ pressed }) => ({
                 opacity: pressed ? 0.5 : 1,
-              })}>
+              })}
+            >
               <FontAwesome
                 name="info-circle"
                 size={25}
@@ -98,8 +135,10 @@ function BottomTabNavigator() {
         name="LoginTab"
         component={LoginTabScreen}
         options={{
-          title: 'Login',
-          tabBarIcon: ({ color }) => <TabBarIcon name="user-circle" color={color} />,
+          title: "Login",
+          tabBarIcon: ({ color }) => (
+            <TabBarIcon name="user-circle" color={color} />
+          ),
         }}
       />
     </BottomTab.Navigator>
@@ -110,7 +149,7 @@ function BottomTabNavigator() {
  * You can explore the built-in icon families and icons on the web at https://icons.expo.fyi/
  */
 function TabBarIcon(props: {
-  name: React.ComponentProps<typeof FontAwesome>['name'];
+  name: React.ComponentProps<typeof FontAwesome>["name"];
   color: string;
 }) {
   return <FontAwesome size={30} style={{ marginBottom: -3 }} {...props} />;

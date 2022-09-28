@@ -33,7 +33,7 @@ export default function WatchTabScreen(
         {
           id: 12,
           number: 1,
-          title: "Firsttt",
+          title: "Departure × And × Friends",
           thumbnail: require("../assets/shows/hxh-banner.jpg"),
           description: "Tired of googling",
           duration: 20,
@@ -43,11 +43,11 @@ export default function WatchTabScreen(
         {
           id: 11,
           number: 2,
-          title: "Secondddd",
+          title: "Test × of × Tests",
           thumbnail: require("../assets/shows/hxh-banner.jpg"),
           description: "Tired of googling",
-          duration: 20,
-          link: "youtube.com",
+          duration: 23,
+          link: "https://www.xpanimes.com/videozin/video-play.mp4/yt.php?contentId=Yi9IZ2VCclhGbWN0aWg4eThadUg5ZWxXdEs3bEZOSzJueFlCZFozYzlpRT0=",
           hasStarted: false,
         },
       ],
@@ -147,7 +147,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     padding: 10,
-    backgroundColor: "rgb(10, 10, 10)",
+    backgroundColor: "rgb(30, 30, 30)",
   },
   showTypeSelector: {
     flexDirection: "row",

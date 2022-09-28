@@ -4,13 +4,14 @@ import { Episode } from "../types";
 import PlayButton from "./PlayButton";
 
 interface IProps {
-  episode: Episode
+  episode: Episode;
+  onPlayPress: () => void;
 }
 
-const EpisodeItem: React.FC<IProps> = ({ episode }) => {
+const EpisodeItem: React.FC<IProps> = ({ episode, onPlayPress }) => {
   return (
     <View style={styles.container}>
-      <View>
+      <View style={{flex: 1}}>
         <Image
           style={styles.thumbnail}
           source={episode.thumbnail}
@@ -20,10 +21,10 @@ const EpisodeItem: React.FC<IProps> = ({ episode }) => {
       <View style={styles.label}>
         <View style={styles.labelText}>
           <Text style={styles.labelTitle}>{episode.title}</Text>
-            <Text>{episode.duration} min</Text>
+          <Text style={{color: "white"}}>{episode.duration} min</Text>
         </View>
-        <PlayButton style={{ top: -25, left: -30 }} />
       </View>
+      <PlayButton onPress={onPlayPress} style={{ flex: 1, width: 50, height: 50, left: -5 }} />
     </View>
   );
 };
@@ -32,9 +33,12 @@ const styles = StyleSheet.create({
   container: {
     borderWidth: 1,
     borderColor: "#03DAC5",
-    width: 370,
-    height: 250,
+    width: "100%",
+    height: 70,
     marginVertical: 10,
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center"
   },
   thumbnail: {
     width: "100%",
@@ -44,23 +48,10 @@ const styles = StyleSheet.create({
     borderEndColor: "rgba(0, 0, 0, 0.1)",
   },
   label: {
-    width: "100%",
+    flex: 5,
     flexDirection: "row",
     justifyContent: "space-between",
-    backgroundColor: "white",
-    height: 60,
-    marginTop: -60,
-    shadowColor: "#000000",
-    shadowOffset: {
-      width: 0,
-      height: 18,
-    },
-    shadowOpacity: 0.25,
-    shadowRadius: 20.0,
-    elevation: 24,
-    borderColor: "#03DAC5",
-    borderWidth: 1,
-    borderTopWidth: 2,
+    padding: 5,
   },
   labelText: {
     padding: 5,
