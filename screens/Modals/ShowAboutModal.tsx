@@ -7,6 +7,7 @@ import {
   FlatList,
 } from "react-native";
 import { Episode, RootStackParamList, Show } from "../../types";
+import { FontAwesome } from "@expo/vector-icons";
 
 import PlayButton from "../../components/PlayButton";
 import EpisodeItem from "../../components/EpisodeItem";
@@ -19,8 +20,11 @@ const ShowAboutModal: React.FC<Props> = ({ route, navigation }) => {
   navigation.setOptions({ title: show.title });
 
   const handleEpisodePlayPress = (episode: Episode) => {
-    navigation.navigate("VideoModal", {title: episode.title, link: episode.link})
-  }
+    navigation.navigate("VideoModal", {
+      title: episode.title,
+      link: episode.link,
+    });
+  };
 
   return (
     <ScrollView style={styles.mainContainer} nestedScrollEnabled={true}>
@@ -37,18 +41,33 @@ const ShowAboutModal: React.FC<Props> = ({ route, navigation }) => {
         />
       </View>
       <View style={styles.aboutContainer}>
-        <Text style={styles.title}>{show.title} ({show.releaseYear})</Text>
+        <Text style={styles.title}>
+          {show.title} ({show.releaseYear})
+        </Text>
+        <View style={styles.starsContainer}>
+          {}
+          <FontAwesome name="star" color={show.rating >= 1 ? "yellow" : "gray"} size={18} />
+          <FontAwesome name="star" color={show.rating >= 2 ? "yellow" : "gray"} size={18} />
+          <FontAwesome name="star" color={show.rating >= 3 ? "yellow" : "gray"} size={18} />
+          <FontAwesome name="star" color={show.rating >= 4 ? "yellow" : "gray"} size={18} />
+          <FontAwesome name="star" color={show.rating >= 5 ? "yellow" : "gray"} size={18} />
+        </View>
         <Text style={styles.description}>{show.description}</Text>
         {show.episodes ? (
           <View>
-            <Text style={[styles.title, {fontSize: 20}]}>
+            <Text style={[styles.title, { fontSize: 20 }]}>
               Episodes ({show.episodes.length})
             </Text>
             <FlatList
               data={show.episodes}
               renderItem={(itemData) => {
                 const { item } = itemData;
-                return <EpisodeItem episode={item} onPlayPress={handleEpisodePlayPress.bind(this, item)} />;
+                return (
+                  <EpisodeItem
+                    episode={item}
+                    onPlayPress={handleEpisodePlayPress.bind(this, item)}
+                  />
+                );
               }}
               keyExtractor={(item, index) => {
                 return item.id.toString() + index.toString();
@@ -57,7 +76,9 @@ const ShowAboutModal: React.FC<Props> = ({ route, navigation }) => {
             />
           </View>
         ) : (
-          <Text style={[styles.title, {color: "white", fontSize: 18}]}>{show.duration} min</Text>
+          <Text style={[styles.title, { color: "white", fontSize: 18 }]}>
+            {show.duration} min
+          </Text>
         )}
       </View>
     </ScrollView>
@@ -75,6 +96,10 @@ const styles = StyleSheet.create({
   thumbnail: {
     width: "100%",
     height: 300,
+  },
+  starsContainer: {
+    flexDirection: "row",
+    paddingBottom: 20
   },
   aboutContainer: {
     padding: 20,

@@ -11,25 +11,33 @@ interface IProps {
   handlePlayButtonPress: (show: any) => void;
 }
 
-const ShowItem: React.FC<IProps> = ({ show, showType, handleImagePress, handlePlayButtonPress }) => {
+const ShowItem: React.FC<IProps> = ({
+  show,
+  showType,
+  handleImagePress,
+  handlePlayButtonPress,
+}) => {
   return (
     <FadeInView style={styles.container}>
       <Pressable onPress={handleImagePress.bind(this, show)}>
-        <Image
-          style={styles.thumbnail}
-          source={show.thumbnail}
-        />
+        <Image style={styles.thumbnail} source={show.thumbnail} />
       </Pressable>
       <View style={styles.label}>
         <View style={styles.labelText}>
           <Text style={styles.labelTitle}>{show.title}</Text>
+
           {showType === "series" ? (
-            <Text style={{color: "white"}}>{show.amountOfEpisodes} episodes</Text>
+            <Text style={{ color: "white" }}>
+              {show.amountOfEpisodes} episodes
+            </Text>
           ) : (
-            <Text style={{color: "white" }}>{show.duration} min</Text>
+            <Text style={{ color: "white" }}>{show.duration} min</Text>
           )}
         </View>
-        <PlayButton style={{ top: -25, left: -30 }} onPress={handlePlayButtonPress.bind(this, show)} />
+        <PlayButton
+          style={{ top: -25, left: -30 }}
+          onPress={handlePlayButtonPress.bind(this, show)}
+        />
       </View>
     </FadeInView>
   );
@@ -65,7 +73,7 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.25,
     shadowRadius: 20.0,
     elevation: 24,
-    opacity: 0.9
+    opacity: 0.9,
   },
   labelText: {
     padding: 5,

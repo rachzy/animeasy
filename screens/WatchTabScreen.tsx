@@ -19,6 +19,7 @@ export default function WatchTabScreen(
       thumbnail: require("../assets/shows/yourname-banner.jpg"),
       duration: 120,
       releaseYear: 2016,
+      rating: 3,
       hasStarted: false,
       link: "https://www.trueliketop.org/play/player/serverjw.php?f=kimi-no-na-wa/leg.mp4",
     },
@@ -54,7 +55,8 @@ export default function WatchTabScreen(
       ],
       hasStarted: false,
       thumbnail: require("../assets/shows/hxh-banner.jpg"),
-      releaseYear: 2011
+      releaseYear: 2011,
+      rating: 4
     },
   ]);
   const [selectedOption, setSelectedOption] = useState<"series" | "movie">(
