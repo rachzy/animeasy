@@ -18,6 +18,7 @@ export default function WatchTabScreen(
         "Your Name is a 2016 Japanese animated romantic fantasy film produced by CoMix Wave Films and distributed by Toho. It depicts a high school boy in Tokyo and a high school girl in the Japanese countryside who suddenly and inexplicably begin to swap bodies",
       thumbnail: require("../assets/shows/yourname-banner.jpg"),
       duration: 120,
+      releaseYear: 2016,
       hasStarted: false,
       link: "https://www.trueliketop.org/play/player/serverjw.php?f=kimi-no-na-wa/leg.mp4",
     },
@@ -53,6 +54,7 @@ export default function WatchTabScreen(
       ],
       hasStarted: false,
       thumbnail: require("../assets/shows/hxh-banner.jpg"),
+      releaseYear: 2011
     },
   ]);
   const [selectedOption, setSelectedOption] = useState<"series" | "movie">(

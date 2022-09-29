@@ -43,6 +43,7 @@ export type Show = {
   description: string;
   thumbnail: ImageSourcePropType;
   hasStarted: boolean;
+  releaseYear: number;
   episodes?: Episode[];
   amountOfEpisodes?: number;
   duration?: number;

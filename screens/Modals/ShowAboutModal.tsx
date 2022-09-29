@@ -37,7 +37,7 @@ const ShowAboutModal: React.FC<Props> = ({ route, navigation }) => {
         />
       </View>
       <View style={styles.aboutContainer}>
-        <Text style={styles.title}>{show.title}</Text>
+        <Text style={styles.title}>{show.title} ({show.releaseYear})</Text>
         <Text style={styles.description}>{show.description}</Text>
         {show.episodes ? (
           <View>
@@ -57,7 +57,7 @@ const ShowAboutModal: React.FC<Props> = ({ route, navigation }) => {
             />
           </View>
         ) : (
-          <Text>{show.duration} min</Text>
+          <Text style={[styles.title, {color: "white", fontSize: 18}]}>{show.duration} min</Text>
         )}
       </View>
     </ScrollView>
