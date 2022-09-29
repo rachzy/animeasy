@@ -110,26 +110,11 @@ function BottomTabNavigator() {
       <BottomTab.Screen
         name="WatchTab"
         component={WatchTabScreen}
-        options={({ navigation }: RootTabScreenProps<"WatchTab">) => ({
+        options={{
           title: "Watch",
           headerTintColor: "white",
           tabBarIcon: ({ color }) => <TabBarIcon name="tv" color={color} />,
-          headerRight: () => (
-            <Pressable
-              onPress={() => {}}
-              style={({ pressed }) => ({
-                opacity: pressed ? 0.5 : 1,
-              })}
-            >
-              <FontAwesome
-                name="info-circle"
-                size={25}
-                color={"white"}
-                style={{ marginRight: 15 }}
-              />
-            </Pressable>
-          ),
-        })}
+        }}
       />
       <BottomTab.Screen
         name="LoginTab"
