@@ -1,6 +1,15 @@
 import { Fragment, useState } from "react";
 
-import { StyleSheet, View, FlatList, Text, Pressable } from "react-native";
+import {
+  StyleSheet,
+  View,
+  FlatList,
+  Text,
+  Pressable,
+  StatusBar,
+} from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
+import FadeInView from "../components/FadeInView";
 import ShowItem from "../components/ShowItem";
 
 import { RootTabScreenProps, Show } from "../types";
@@ -56,7 +65,7 @@ export default function WatchTabScreen(
       hasStarted: false,
       thumbnail: require("../assets/shows/hxh-banner.jpg"),
       releaseYear: 2011,
-      rating: 4
+      rating: 4,
     },
   ]);
   const [selectedOption, setSelectedOption] = useState<"series" | "movie">(
@@ -70,13 +79,22 @@ export default function WatchTabScreen(
 
   const handlePlayPress = (show: Show) => {
     navigation.navigate("VideoModal", {
-      title: show.type === "movie" ? show.title : (show.episodes && show.episodes[0].title) || "",
-      link: (show.type === "movie" ? show.link : (show.episodes && show.episodes[0].link)) || "",
+      title:
+        show.type === "movie"
+          ? show.title
+          : (show.episodes && show.episodes[0].title) || "",
+      link:
+        (show.type === "movie"
+          ? show.link
+          : show.episodes && show.episodes[0].link) || "",
     });
-  }
+  };
 
   const handleShowImagePress = (show: Show) => {
-    navigation.navigate("ShowAboutModal", { show: show, handlePlayPress: handlePlayPress });
+    navigation.navigate("ShowAboutModal", {
+      show: show,
+      handlePlayPress: handlePlayPress,
+    });
   };
 
   const renderShows = () => {
@@ -105,43 +123,45 @@ export default function WatchTabScreen(
   };
 
   return (
-    <View style={styles.container}>
-      <View style={styles.showTypeSelector}>
-        <Pressable
-          onPress={handleOptionPress.bind(this, "series")}
-          style={[
-            styles.showTypeOption,
-            selectedOption === "series" && styles.optionSelected,
-          ]}
-        >
-          <Text
+    <FadeInView duration={200} style={styles.container}>
+      <SafeAreaView style={styles.container}>
+        <View style={styles.showTypeSelector}>
+          <Pressable
+            onPress={handleOptionPress.bind(this, "series")}
             style={[
-              styles.showTypeOptionLabel,
-              selectedOption === "series" && styles.labelSelected,
+              styles.showTypeOption,
+              selectedOption === "series" && styles.optionSelected,
             ]}
           >
-            Series
-          </Text>
-        </Pressable>
-        <Pressable
-          onPress={handleOptionPress.bind(this, "movie")}
-          style={[
-            styles.showTypeOption,
-            selectedOption === "movie" && styles.optionSelected,
-          ]}
-        >
-          <Text
+            <Text
+              style={[
+                styles.showTypeOptionLabel,
+                selectedOption === "series" && styles.labelSelected,
+              ]}
+            >
+              Series
+            </Text>
+          </Pressable>
+          <Pressable
+            onPress={handleOptionPress.bind(this, "movie")}
             style={[
-              styles.showTypeOptionLabel,
-              selectedOption === "movie" && styles.labelSelected,
+              styles.showTypeOption,
+              selectedOption === "movie" && styles.optionSelected,
             ]}
           >
-            Movies
-          </Text>
-        </Pressable>
-      </View>
-      {renderShows()}
-    </View>
+            <Text
+              style={[
+                styles.showTypeOptionLabel,
+                selectedOption === "movie" && styles.labelSelected,
+              ]}
+            >
+              Movies
+            </Text>
+          </Pressable>
+        </View>
+        {renderShows()}
+      </SafeAreaView>
+    </FadeInView>
   );
 }
 
@@ -152,6 +172,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     padding: 10,
     backgroundColor: "rgb(30, 30, 30)",
+    paddingTop: StatusBar.currentHeight || 0,
   },
   showTypeSelector: {
     flexDirection: "row",

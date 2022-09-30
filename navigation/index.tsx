@@ -12,7 +12,7 @@ import {
 } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import * as React from "react";
-import { ColorSchemeName, Pressable } from "react-native";
+import { ColorSchemeName } from "react-native";
 
 import useColorScheme from "../hooks/useColorScheme";
 import NotFoundScreen from "../screens/NotFoundScreen";
@@ -21,7 +21,6 @@ import LoginTabScreen from "../screens/LoginTabScreen";
 import {
   RootStackParamList,
   RootTabParamList,
-  RootTabScreenProps,
 } from "../types";
 import LinkingConfiguration from "./LinkingConfiguration";
 import ShowAboutModal from "../screens/Modals/ShowAboutModal";
@@ -105,6 +104,7 @@ function BottomTabNavigator() {
         headerStyle: {
           backgroundColor: "rgb(50, 50, 50)",
         },
+        headerShown: false
       }}
     >
       <BottomTab.Screen
@@ -121,6 +121,7 @@ function BottomTabNavigator() {
         component={LoginTabScreen}
         options={{
           title: "Login",
+          headerTintColor: "white",
           tabBarIcon: ({ color }) => (
             <TabBarIcon name="user-circle" color={color} />
           ),
