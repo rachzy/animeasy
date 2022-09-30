@@ -11,7 +11,7 @@ interface IProps {
 const EpisodeItem: React.FC<IProps> = ({ episode, onPlayPress }) => {
   return (
     <View style={styles.container}>
-      <View style={{flex: 1}}>
+      <View style={{ flex: 1 }}>
         <Image
           style={styles.thumbnail}
           source={episode.thumbnail}
@@ -21,10 +21,13 @@ const EpisodeItem: React.FC<IProps> = ({ episode, onPlayPress }) => {
       <View style={styles.label}>
         <View style={styles.labelText}>
           <Text style={styles.labelTitle}>{episode.title}</Text>
-          <Text style={{color: "white"}}>{episode.duration} min</Text>
+          <Text style={{ color: "white" }}>{episode.duration} min</Text>
         </View>
       </View>
-      <PlayButton onPress={onPlayPress} style={{ flex: 1, width: 50, height: 50, left: -5 }} />
+      <PlayButton
+        onPress={onPlayPress}
+        style={{ flex: 1, width: 50, height: 50, left: -5 }}
+      />
     </View>
   );
 };
@@ -38,7 +41,7 @@ const styles = StyleSheet.create({
     marginVertical: 10,
     flexDirection: "row",
     justifyContent: "center",
-    alignItems: "center"
+    alignItems: "center",
   },
   thumbnail: {
     width: "100%",

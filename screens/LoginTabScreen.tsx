@@ -1,29 +1,51 @@
-import { View, Text, StyleSheet } from 'react-native';
+import { useEffect } from "react";
+import { useRef } from "react";
+import { Animated, View, Text, StyleSheet, Button, Image } from "react-native";
+import DefaultButton from "../components/DefaultButton";
+import FadeInView from "../components/FadeInView";
 
-import { RootTabScreenProps } from '../types';
-
-export default function LoginTabScreen({ navigation }: RootTabScreenProps<'LoginTab'>) {
+const LoginTabScreen = () => {
+  const banner = require("../assets/images/killua-icon.png");
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Coming Soon!</Text>
-    </View>
+    <FadeInView style={styles.container}>
+      <View style={styles.bannerTitleContainer}>
+        <Image style={styles.banner} source={banner} />
+        <Text style={styles.title}>Animeasy</Text>
+      </View>
+      <View style={{width: "90%"}}>
+        <DefaultButton>Log in</DefaultButton>
+        <DefaultButton color="rgb(50, 50, 50)">Register</DefaultButton>
+      </View>
+    </FadeInView>
   );
-}
+};
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
+    alignItems: "center",
+    justifyContent: "flex-end",
+    backgroundColor: "rgb(30, 30, 50)",
+  },
+  bannerTitleContainer: {
+    position: "absolute",
+    top: 100,
+    left: 50,
+  },
+  banner: {
+    width: 290,
+    height: 280,
   },
   title: {
-    fontSize: 20,
-    fontWeight: 'bold',
-    color: "white"
+    color: "white",
+    fontSize: 40,
+    textAlign: "center",
+    fontFamily: "space-mono",
   },
-  separator: {
-    marginVertical: 30,
-    height: 1,
-    width: '80%',
+  button: {
+    marginBottom: 20,
+    width: "90%",
   },
 });
+
+export default LoginTabScreen;
