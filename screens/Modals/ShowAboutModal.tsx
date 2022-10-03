@@ -87,7 +87,7 @@ const ShowAboutModal: React.FC<Props> = ({ route, navigation }) => {
 
 const styles = StyleSheet.create({
   mainContainer: {
-    backgroundColor: "rgb(20, 20, 20)",
+    backgroundColor: "rgb(30, 30, 30)",
   },
   thumbnailContainer: {
     borderBottomColor: "#03DAC5",

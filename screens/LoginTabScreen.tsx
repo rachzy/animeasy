@@ -1,11 +1,16 @@
-import { useEffect } from "react";
-import { useRef } from "react";
 import { Animated, View, Text, StyleSheet, Button, Image } from "react-native";
+
 import DefaultButton from "../components/DefaultButton";
 import FadeInView from "../components/FadeInView";
+import { RootTabScreenProps } from "../types";
 
-const LoginTabScreen = () => {
+const LoginTabScreen = ({navigation}: RootTabScreenProps<"LoginTab">) => {
   const banner = require("../assets/images/killua-icon.png");
+
+  const handleLoginButtonPress = () => {
+    navigation.navigate("LoginModal");
+  }
+
   return (
     <FadeInView style={styles.container}>
       <View style={styles.bannerTitleContainer}>
@@ -13,7 +18,7 @@ const LoginTabScreen = () => {
         <Text style={styles.title}>Animeasy</Text>
       </View>
       <View style={{width: "90%"}}>
-        <DefaultButton>Log in</DefaultButton>
+        <DefaultButton onPress={handleLoginButtonPress}>Log in</DefaultButton>
         <DefaultButton color="rgb(50, 50, 50)">Register</DefaultButton>
       </View>
     </FadeInView>

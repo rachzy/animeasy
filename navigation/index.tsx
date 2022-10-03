@@ -9,6 +9,7 @@ import {
   NavigationContainer,
   DefaultTheme,
   DarkTheme,
+  createNavigatorFactory,
 } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import * as React from "react";
@@ -18,13 +19,12 @@ import useColorScheme from "../hooks/useColorScheme";
 import NotFoundScreen from "../screens/NotFoundScreen";
 import WatchTabScreen from "../screens/WatchTabScreen";
 import LoginTabScreen from "../screens/LoginTabScreen";
-import {
-  RootStackParamList,
-  RootTabParamList,
-} from "../types";
+import { RootStackParamList, RootTabParamList } from "../types";
 import LinkingConfiguration from "./LinkingConfiguration";
 import ShowAboutModal from "../screens/Modals/ShowAboutModal";
 import VideoModal from "../screens/Modals/VideoModal";
+import LoginModal from "../screens/Modals/LoginModal";
+import RegisterModal from "../screens/Modals/RegisterModal";
 
 export default function Navigation({
   colorScheme,
@@ -78,6 +78,8 @@ function RootNavigator() {
           component={VideoModal}
           options={{ gestureEnabled: true }}
         />
+        <Stack.Screen name="LoginModal" component={LoginModal} />
+        <Stack.Screen name="RegisterModal" component={RegisterModal} />
       </Stack.Group>
     </Stack.Navigator>
   );
@@ -104,7 +106,7 @@ function BottomTabNavigator() {
         headerStyle: {
           backgroundColor: "rgb(50, 50, 50)",
         },
-        headerShown: false
+        headerShown: false,
       }}
     >
       <BottomTab.Screen

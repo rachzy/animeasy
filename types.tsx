@@ -19,6 +19,8 @@ export type RootStackParamList = {
   NotFound: undefined;
   ShowAboutModal: {show: Show, handlePlayPress: (show: Show) => void};
   VideoModal: {title: string; link: string}
+  LoginModal: undefined;
+  RegisterModal: undefined;
 };
 
 export type RootStackScreenProps<Screen extends keyof RootStackParamList> = NativeStackScreenProps<

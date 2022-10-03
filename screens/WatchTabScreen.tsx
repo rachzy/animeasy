@@ -170,7 +170,6 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
     justifyContent: "center",
-    padding: 10,
     backgroundColor: "rgb(30, 30, 30)",
     paddingTop: StatusBar.currentHeight || 0,
   },
