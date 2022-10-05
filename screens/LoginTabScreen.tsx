@@ -11,6 +11,10 @@ const LoginTabScreen = ({navigation}: RootTabScreenProps<"LoginTab">) => {
     navigation.navigate("LoginModal");
   }
 
+  const handleRegisterButtonPress = () => {
+    navigation.navigate("RegisterModal");
+  }
+
   return (
     <FadeInView style={styles.container}>
       <View style={styles.bannerTitleContainer}>
@@ -19,7 +23,7 @@ const LoginTabScreen = ({navigation}: RootTabScreenProps<"LoginTab">) => {
       </View>
       <View style={{width: "90%"}}>
         <DefaultButton onPress={handleLoginButtonPress}>Log in</DefaultButton>
-        <DefaultButton color="rgb(50, 50, 50)">Register</DefaultButton>
+        <DefaultButton onPress={handleRegisterButtonPress} color="rgb(50, 50, 50)">Register</DefaultButton>
       </View>
     </FadeInView>
   );
