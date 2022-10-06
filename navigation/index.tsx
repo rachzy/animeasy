@@ -9,13 +9,11 @@ import {
   NavigationContainer,
   DefaultTheme,
   DarkTheme,
-  createNavigatorFactory,
 } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import * as React from "react";
-import { ColorSchemeName } from "react-native";
+import { ColorSchemeName, View, Text } from "react-native";
 
-import useColorScheme from "../hooks/useColorScheme";
 import NotFoundScreen from "../screens/NotFoundScreen";
 import WatchTabScreen from "../screens/WatchTabScreen";
 import LoginTabScreen from "../screens/LoginTabScreen";
@@ -26,11 +24,15 @@ import VideoModal from "../screens/Modals/VideoModal";
 import LoginModal from "../screens/Modals/LoginModal";
 import RegisterModal from "../screens/Modals/RegisterModal";
 
-export default function Navigation({
-  colorScheme,
-}: {
+import { UserGlobalContext } from "../App";
+import { useContext } from "react";
+import UserTabScreen from "../screens/UserTabScreen";
+
+interface IProps {
   colorScheme: ColorSchemeName;
-}) {
+}
+
+const Navigation: React.FC<IProps> = ({ colorScheme }) => {
   return (
     <NavigationContainer
       linking={LinkingConfiguration}
@@ -39,7 +41,7 @@ export default function Navigation({
       <RootNavigator />
     </NavigationContainer>
   );
-}
+};
 
 /**
  * A root stack navigator is often used for displaying modals on top of all other content.
@@ -92,8 +94,9 @@ function RootNavigator() {
 const BottomTab = createBottomTabNavigator<RootTabParamList>();
 
 function BottomTabNavigator() {
-  const colorScheme = useColorScheme();
-
+  const getUserGlobalContext = useContext(UserGlobalContext);
+  if (!getUserGlobalContext) return null;
+  const { userContext, setUserContext } = getUserGlobalContext;
   return (
     <BottomTab.Navigator
       initialRouteName="WatchTab"
@@ -120,10 +123,15 @@ function BottomTabNavigator() {
       />
       <BottomTab.Screen
         name="LoginTab"
-        component={LoginTabScreen}
+        component={userContext.isLoggedIn ? UserTabScreen : LoginTabScreen}
         options={{
-          title: "Login",
+          title: "Profile",
           headerTintColor: "white",
+          headerRight: () => (
+            <View style={{ paddingRight: 20 }}>
+              <TabBarIcon name="ellipsis-v" color={"white"} />
+            </View>
+          ),
           tabBarIcon: ({ color }) => (
             <TabBarIcon name="user-circle" color={color} />
           ),
@@ -142,3 +150,5 @@ function TabBarIcon(props: {
 }) {
   return <FontAwesome size={30} style={{ marginBottom: -3 }} {...props} />;
 }
+
+export default Navigation;

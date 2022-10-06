@@ -3,10 +3,13 @@
  * https://reactnavigation.org/docs/typescript/
  */
 
-import { BottomTabScreenProps } from '@react-navigation/bottom-tabs';
-import { CompositeScreenProps, NavigatorScreenParams } from '@react-navigation/native';
-import { NativeStackScreenProps } from '@react-navigation/native-stack';
-import {ImageSourcePropType} from "react-native"
+import { BottomTabScreenProps } from "@react-navigation/bottom-tabs";
+import {
+  CompositeScreenProps,
+  NavigatorScreenParams,
+} from "@react-navigation/native";
+import { NativeStackScreenProps } from "@react-navigation/native-stack";
+import { ImageSourcePropType } from "react-native";
 
 declare global {
   namespace ReactNavigation {
@@ -17,30 +20,53 @@ declare global {
 export type RootStackParamList = {
   Root: NavigatorScreenParams<RootTabParamList> | undefined;
   NotFound: undefined;
-  ShowAboutModal: {show: Show, handlePlayPress: (show: Show) => void};
-  VideoModal: {title: string; link: string}
+  ShowAboutModal: { show: Show; handlePlayPress: (show: Show) => void };
+  VideoModal: { title: string; link: string };
   LoginModal: undefined;
   RegisterModal: undefined;
 };
 
-export type RootStackScreenProps<Screen extends keyof RootStackParamList> = NativeStackScreenProps<
-  RootStackParamList,
-  Screen
->;
+export type RootStackScreenProps<Screen extends keyof RootStackParamList> =
+  NativeStackScreenProps<RootStackParamList, Screen>;
 
 export type RootTabParamList = {
   WatchTab: undefined;
   LoginTab: undefined;
 };
 
-export type RootTabScreenProps<Screen extends keyof RootTabParamList> = CompositeScreenProps<
-  BottomTabScreenProps<RootTabParamList, Screen>,
-  NativeStackScreenProps<RootStackParamList>
->;
+export type RootTabScreenProps<Screen extends keyof RootTabParamList> =
+  CompositeScreenProps<
+    BottomTabScreenProps<RootTabParamList, Screen>,
+    NativeStackScreenProps<RootStackParamList>
+  >;
+
+// User
+
+type startedShow = {
+  id: number;
+  type: "movie" | "series";
+  episode?: number;
+};
+
+export interface IUser {
+  data?: {
+    id: number;
+    username: string;
+    profilePicture: string;
+    bannerPicture: string;
+    watchedShows: startedShow[];
+  };
+  security?: {
+    token: string;
+  };
+  isLoggedIn: boolean;
+}
+
+// Shows
 
 export type Show = {
   id: number;
-  type: "movie" | "series",
+  type: "movie" | "series";
   title: string;
   description: string;
   thumbnail: ImageSourcePropType;
@@ -51,10 +77,10 @@ export type Show = {
   amountOfEpisodes?: number;
   duration?: number;
   link?: string;
-}
+};
 
 export interface IMovie extends Show {
-  duration: number
+  duration: number;
   link: string;
 }
 
@@ -67,9 +93,9 @@ export type Episode = {
   duration: number;
   link: string;
   hasStarted: boolean;
-}
+};
 
 export interface ISeries extends Show {
   amountOfEpisodes: number;
-  episodes: Episode[]
+  episodes: Episode[];
 }

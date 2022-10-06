@@ -6,6 +6,7 @@ import {
   FlatList,
   Text,
   Pressable,
+  Platform,
   StatusBar,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -171,7 +172,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     backgroundColor: "rgb(30, 30, 30)",
-    paddingTop: StatusBar.currentHeight || 0,
+    paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0,
   },
   showTypeSelector: {
     flexDirection: "row",

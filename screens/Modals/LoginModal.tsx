@@ -87,6 +87,25 @@ const LoginModal: React.FC<
     });
   };
 
+  const debugFunction = () => {
+    const getUser = DummyDatabase.users.filter(
+      (user) => user.username === "rach" && user.password === "contarach01"
+    );
+
+    setUserContext({
+      data: {
+        id: getUser[0].id,
+        username: getUser[0].username,
+        profilePicture: getUser[0].profilePicture,
+        bannerPicture: getUser[0].bannerPicture,
+        watchedShows: getUser[0].watchedShows,
+      },
+      security: { token: getUser[0].token },
+      isLoggedIn: true,
+    });
+    navigation.navigate("Root", { screen: "LoginTab" });
+  };
+
   return (
     <View style={styles.mainContainer}>
       <Text style={styles.title}>Welcome back!</Text>
@@ -125,6 +144,9 @@ const LoginModal: React.FC<
       </DefaultButton>
       <Pressable>
         <Text style={styles.forgotPasswordLabel}>Forgot your password?</Text>
+      </Pressable>
+      <Pressable onPress={debugFunction}>
+        <Text style={styles.forgotPasswordLabel}>Debug</Text>
       </Pressable>
     </View>
   );
