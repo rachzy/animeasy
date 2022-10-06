@@ -4,16 +4,16 @@ import DefaultButton from "../components/DefaultButton";
 import FadeInView from "../components/FadeInView";
 import { RootTabScreenProps } from "../types";
 
-const LoginTabScreen = ({navigation}: RootTabScreenProps<"LoginTab">) => {
+const LoginTabScreen = ({ navigation }: RootTabScreenProps<"LoginTab">) => {
   const banner = require("../assets/images/killua-icon.png");
 
   const handleLoginButtonPress = () => {
     navigation.navigate("LoginModal");
-  }
+  };
 
   const handleRegisterButtonPress = () => {
     navigation.navigate("RegisterModal");
-  }
+  };
 
   return (
     <FadeInView style={styles.container}>
@@ -21,9 +21,14 @@ const LoginTabScreen = ({navigation}: RootTabScreenProps<"LoginTab">) => {
         <Image style={styles.banner} source={banner} />
         <Text style={styles.title}>Animeasy</Text>
       </View>
-      <View style={{width: "90%"}}>
+      <View style={{ width: "90%" }}>
         <DefaultButton onPress={handleLoginButtonPress}>Log in</DefaultButton>
-        <DefaultButton onPress={handleRegisterButtonPress} color="rgb(50, 50, 50)">Register</DefaultButton>
+        <DefaultButton
+          onPress={handleRegisterButtonPress}
+          color="rgb(50, 50, 50)"
+        >
+          Register
+        </DefaultButton>
       </View>
     </FadeInView>
   );
@@ -49,7 +54,7 @@ const styles = StyleSheet.create({
     color: "white",
     fontSize: 40,
     textAlign: "center",
-    fontFamily: "space-mono",
+    fontFamily: "Poppins",
   },
   button: {
     marginBottom: 20,
