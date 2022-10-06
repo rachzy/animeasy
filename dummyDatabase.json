@@ -1,0 +1,24 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "username": "rach",
+      "email": "rachultimate@gmail.com",
+      "password": "contarach01",
+      "profilePicture": "rach-pfp.png",
+      "bannerPicture": "rach-banner.png",
+      "watchedShows": [],
+      "token": "1001"
+    },
+    {
+      "id": 2,
+      "username": "oBST",
+      "email": "obst@gmail.com",
+      "password": "contaobst02",
+      "profilePicture": "obst-pfp.png",
+      "bannerPicture": "obst-banner.png",
+      "watchedShows": [],
+      "token": "0110"
+    }
+  ]
+}

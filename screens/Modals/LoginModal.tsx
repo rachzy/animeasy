@@ -1,18 +1,15 @@
-import {
-  Text,
-  TextInput,
-  View,
-  StyleSheet,
-  Pressable,
-  TextInputChangeEventData,
-} from "react-native";
+import { useState } from "react";
+import { Text, TextInput, View, StyleSheet, Pressable } from "react-native";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 
 import { RootStackParamList } from "../../types";
 
 import DefaultButton from "../../components/DefaultButton";
-import { useState } from "react";
-import { TextInputProps } from "react-native";
+
+import { UserGlobalContext } from "../../App";
+import { useContext } from "react";
+
+import DummyDatabase from "../../dummyDatabase.json";
 
 const LoginModal: React.FC<
   NativeStackScreenProps<RootStackParamList, "LoginModal">
@@ -25,6 +22,11 @@ const LoginModal: React.FC<
       backgroundColor: "transparent",
     },
   });
+
+  const getUserGlobalContext = useContext(UserGlobalContext);
+  if (!getUserGlobalContext) return null;
+
+  const { setUserContext } = getUserGlobalContext;
 
   const [inputValues, setInputValues] = useState({
     email: "",
@@ -46,11 +48,34 @@ const LoginModal: React.FC<
     });
     setTimeout(() => {
       setToggleButtonLoading(false);
-      setErrorValues({
-        email: "Incorrect email or username",
-        password: "Wrong password",
+
+      const getUser = DummyDatabase.users.filter(
+        (user) =>
+          (user.email === inputValues.email ||
+            user.username === inputValues.email) &&
+          user.password === inputValues.password
+      );
+
+      if (getUser.length !== 1) {
+        return setErrorValues({
+          email: "Invalid email address or usename",
+          password: "Invalid password",
+        });
+      }
+
+      setUserContext({
+        data: {
+          id: getUser[0].id,
+          username: getUser[0].username,
+          profilePicture: getUser[0].profilePicture,
+          bannerPicture: getUser[0].bannerPicture,
+          watchedShows: getUser[0].watchedShows,
+        },
+        security: { token: getUser[0].token },
+        isLoggedIn: true,
       });
-    }, 2000);
+      navigation.navigate("Root", { screen: "LoginTab" });
+    }, 500);
   };
 
   const handleInputChange = (name: "email" | "password", text: string) => {
