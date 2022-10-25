@@ -21,7 +21,7 @@ const EpisodeItem: React.FC<IProps> = ({ episode, onPlayPress }) => {
       <View style={styles.label}>
         <View style={styles.labelText}>
           <Text style={styles.labelTitle}>{episode.title}</Text>
-          <Text style={{ color: "white" }}>{episode.duration} min</Text>
+          <Text style={{ color: "lightgray" }}>{episode.duration} min</Text>
         </View>
       </View>
       <PlayButton
@@ -42,6 +42,8 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "center",
     alignItems: "center",
+    borderRadius: 15,
+    overflow: "hidden",
   },
   thumbnail: {
     width: "100%",
@@ -60,7 +62,7 @@ const styles = StyleSheet.create({
     padding: 5,
   },
   labelTitle: {
-    color: "#03DAC5",
+    color: "white",
     fontStyle: "italic",
     fontWeight: "900",
     fontSize: 20,
