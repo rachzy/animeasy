@@ -1,4 +1,4 @@
-import { View, Image, Text, StyleSheet, Pressable } from "react-native";
+import { View, Image, Text, StyleSheet } from "react-native";
 
 import { Episode } from "../types";
 import PlayButton from "./PlayButton";

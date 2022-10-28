@@ -1,22 +1,37 @@
 import { View, Image, Text, StyleSheet, Pressable } from "react-native";
 
-import { Show } from "../types";
 import FadeInView from "./FadeInView";
 import PlayButton from "./PlayButton";
+
+import { Show } from "../types";
+import { useNavigation } from "@react-navigation/native";
 
 interface IProps {
   show: Show;
   showType: "movie" | "series";
-  handleImagePress: (show: any) => void;
-  handlePlayButtonPress: (show: any) => void;
 }
 
-const ShowItem: React.FC<IProps> = ({
-  show,
-  showType,
-  handleImagePress,
-  handlePlayButtonPress,
-}) => {
+const ShowItem: React.FC<IProps> = ({ show, showType }) => {
+  const navigation = useNavigation();
+  const handlePlayButtonPress = () => {
+    navigation.navigate("VideoModal", {
+      title:
+        show.type === "movie"
+          ? show.title
+          : (show.episodes && show.episodes[0].title) || "",
+      link:
+        (show.type === "movie"
+          ? show.link
+          : show.episodes && show.episodes[0].link) || "",
+    });
+  };
+
+  const handleImagePress = () => {
+    navigation.navigate("ShowAboutModal", {
+      show: show,
+      handlePlayPress: handlePlayButtonPress,
+    });
+  };
   return (
     <FadeInView style={styles.container}>
       <Pressable onPress={handleImagePress.bind(this, show)}>
