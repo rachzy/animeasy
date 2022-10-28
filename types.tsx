@@ -44,8 +44,8 @@ export type RootTabScreenProps<Screen extends keyof RootTabParamList> =
 
 type startedShow = {
   id: number;
-  type: "movie" | "series";
   episode?: number;
+  currentSecond: number;
 };
 
 export interface IUser {
@@ -55,6 +55,7 @@ export interface IUser {
     profilePicture: string;
     bannerPicture: string;
     watchedShows: startedShow[];
+    favoriteShows: startedShow[];
   };
   security?: {
     token: string;
@@ -70,7 +71,6 @@ export type Show = {
   title: string;
   description: string;
   thumbnail: ImageSourcePropType;
-  hasStarted: boolean;
   releaseYear: number;
   rating: number;
   episodes?: Episode[];
@@ -92,7 +92,6 @@ export type Episode = {
   thumbnail: ImageSourcePropType;
   duration: number;
   link: string;
-  hasStarted: boolean;
 };
 
 export interface ISeries extends Show {
