@@ -9,9 +9,10 @@ import { useNavigation } from "@react-navigation/native";
 interface IProps {
   show: Show;
   showType: "movie" | "series";
+  size?: number;
 }
 
-const ShowItem: React.FC<IProps> = ({ show, showType }) => {
+const ShowItem: React.FC<IProps> = ({ show, showType, size }) => {
   const navigation = useNavigation();
   const handlePlayButtonPress = () => {
     navigation.navigate("VideoModal", {
@@ -33,7 +34,9 @@ const ShowItem: React.FC<IProps> = ({ show, showType }) => {
     });
   };
   return (
-    <FadeInView style={styles.container}>
+    <FadeInView
+      style={[styles.container, size && { width: size, height: size - 120 }]}
+    >
       <Pressable onPress={handleImagePress.bind(this, show)}>
         <Image style={styles.thumbnail} source={show.thumbnail} />
       </Pressable>
@@ -65,6 +68,7 @@ const styles = StyleSheet.create({
     width: 370,
     height: 250,
     marginVertical: 10,
+    alignSelf: "center",
   },
   thumbnail: {
     width: "100%",

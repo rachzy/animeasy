@@ -3,8 +3,12 @@ import { useContext, useState } from "react";
 import { Pressable, StyleSheet } from "react-native";
 import { SafeAreaView, Text, View, Image } from "react-native";
 
+import ShowList from "../components/ShowList";
+
 import { UserGlobalContext } from "../App";
 import { RootTabScreenProps } from "../types";
+
+import { ShowsGlobalContext } from "../App";
 
 const UserTabScreen = ({ navigation }: RootTabScreenProps<"LoginTab">) => {
   navigation.setOptions({
@@ -16,20 +20,36 @@ const UserTabScreen = ({ navigation }: RootTabScreenProps<"LoginTab">) => {
     },
   });
   const getUserGlobalContext = useContext(UserGlobalContext);
-  if (!getUserGlobalContext) return null;
+  const shows = useContext(ShowsGlobalContext);
+  if (!getUserGlobalContext || !shows) return null;
 
   const { data } = getUserGlobalContext.userContext;
 
   const user = {
-    username: data?.username,
+    ...data,
     pfp: require(`../assets/images/killua-icon.png`),
     banner: require(`../assets/shows/yourname-banner.jpg`),
   };
 
-  const [selectedMenu, setSelectedMenu] = useState(1);
+  const [selectedMenu, setSelectedMenu] = useState<"watched" | "favorite">(
+    "watched"
+  );
 
-  const handleMenuPress = (menuNumber: number) => {
-    setSelectedMenu(menuNumber);
+  const handleMenuPress = (menuId: "watched" | "favorite") => {
+    setSelectedMenu(menuId);
+  };
+
+  const renderShowsBySelectedMenu = () => {
+    if (selectedMenu === "watched") {
+      if (!user.watchedShows) return [];
+      return user.watchedShows.map((watchedShow) => {
+        return shows.filter((show) => show.id === watchedShow.id)[0];
+      });
+    }
+    if (!user.favoriteShows) return [];
+    return user.favoriteShows.map((favoriteShow) => {
+      return shows.filter((show) => show.id === favoriteShow.id)[0];
+    });
   };
 
   return (
@@ -49,21 +69,21 @@ const UserTabScreen = ({ navigation }: RootTabScreenProps<"LoginTab">) => {
         <View style={styles.iconsContainer}>
           <Pressable
             style={styles.iconContainer}
-            onPress={handleMenuPress.bind(this, 1)}
+            onPress={handleMenuPress.bind(this, "watched")}
           >
             <FontAwesome
               name="clone"
-              color={selectedMenu === 1 ? "#03DAC5" : "gray"}
+              color={selectedMenu === "watched" ? "#03DAC5" : "gray"}
               size={24}
             />
           </Pressable>
           <Pressable
             style={styles.iconContainer}
-            onPress={handleMenuPress.bind(this, 2)}
+            onPress={handleMenuPress.bind(this, "favorite")}
           >
             <FontAwesome
               name="star-o"
-              color={selectedMenu === 2 ? "#03DAC5" : "gray"}
+              color={selectedMenu === "favorite" ? "#03DAC5" : "gray"}
               size={24}
             />
           </Pressable>
@@ -71,9 +91,10 @@ const UserTabScreen = ({ navigation }: RootTabScreenProps<"LoginTab">) => {
         <View
           style={[
             styles.selectBar,
-            selectedMenu === 2 && { alignSelf: "flex-end" },
+            selectedMenu === "favorite" && { alignSelf: "flex-end" },
           ]}
         />
+        <ShowList shows={renderShowsBySelectedMenu()} itemSize={320} />
       </View>
     </SafeAreaView>
   );
@@ -135,6 +156,7 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     height: 3,
     marginTop: -20,
+    marginBottom: 20,
   },
 });
 

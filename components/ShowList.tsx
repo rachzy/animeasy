@@ -7,16 +7,17 @@ import ShowItem from "./ShowItem";
 
 interface IProps {
   shows: Show[];
+  itemSize?: number;
 }
 
-const ShowList: React.FC<IProps> = ({ shows }) => {
+const ShowList: React.FC<IProps> = ({ shows, itemSize }) => {
   return (
     <Fragment>
       <FlatList
         data={shows}
         renderItem={(itemData) => {
           const { item } = itemData;
-          return <ShowItem show={item} showType={item.type} />;
+          return <ShowItem show={item} showType={item.type} size={itemSize} />;
         }}
         keyExtractor={(item, index) => {
           return item.id.toString() + index.toString();
