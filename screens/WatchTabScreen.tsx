@@ -1,9 +1,8 @@
 import { useContext, useEffect } from "react";
-import { Fragment, useState } from "react";
+import { useState } from "react";
 import {
   StyleSheet,
   View,
-  FlatList,
   Text,
   Pressable,
   Platform,
@@ -11,22 +10,28 @@ import {
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
-import FadeInView from "../components/FadeInView";
-import ShowItem from "../components/ShowItem";
-
 import { RootTabScreenProps, Show } from "../types";
 
 import { ShowsGlobalContext } from "../App";
+
+import FadeInView from "../components/FadeInView";
 import ShowList from "../components/ShowList";
+import SearchInput from "../components/SearchInput";
 
 export default function WatchTabScreen(
   this: any,
   { navigation }: RootTabScreenProps<"WatchTab">
 ) {
   const [shows, setShows] = useState<Show[]>([]);
+  const [searchInputValue, setSearchInputValue] = useState("");
   const [selectedOption, setSelectedOption] = useState<"series" | "movie">(
     "series"
   );
+  const [debounch, setDebounch] = useState();
+
+  const filteredShows = searchInputValue
+    ? shows.filter((show) => show.title.toUpperCase().includes(searchInputValue.trim().toUpperCase()))
+    : shows;
 
   const getShowsContext = useContext(ShowsGlobalContext);
 
@@ -48,9 +53,20 @@ export default function WatchTabScreen(
     setSelectedOption(optionTitle);
   };
 
+  const handleSearchTextInputChange = (text: string) => {
+    setSearchInputValue(text);
+  };
+
+  const handleSearchButtonClick = () => {};
+
   return (
     <FadeInView duration={200} style={styles.container}>
       <SafeAreaView style={styles.container}>
+        <SearchInput
+          value={searchInputValue}
+          onChange={handleSearchTextInputChange}
+          onClick={handleSearchButtonClick}
+        />
         <View style={styles.showTypeSelector}>
           <Pressable
             onPress={handleOptionPress.bind(this, "series")}
@@ -86,7 +102,7 @@ export default function WatchTabScreen(
           </Pressable>
         </View>
         <ShowList
-          shows={shows.filter((show) => show.type === selectedOption)}
+          shows={filteredShows.filter((show) => show.type === selectedOption)}
         />
       </SafeAreaView>
     </FadeInView>
